@@ -31,6 +31,7 @@ xf = rfftfreq(N, 1 / SAMPLE_RATE)
 
 #plot
 plt.plot(xf, np.abs(yf))
+plt.xlim(0, 150000)
 plt.show()
 
 #Save to a new CSV file
