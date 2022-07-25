@@ -34,18 +34,22 @@ plt.plot(xf, np.abs(yf))
 plt.xlim(0, 150000)
 plt.show()
 
-#Save to a new CSV file
-np.savetxt("FFTofData.csv", yf, 
-              delimiter = ",")
-
 #Find primary frequency
 yf_abs = np.abs(yf)
 PrimFreq_Amp = np.max(yf_abs)
-#print(PrimFreq_Amp)
-
 for coef, freq in zip(yf_abs, xf):
     if (coef == PrimFreq_Amp):
         PrimFreq = freq
         print("The primary frequency is " + str(PrimFreq) + " Hz")
-        
+ 
+#Save complex values from FFT to a new CSV file
+np.savetxt("FFTofData.csv", yf, 
+              delimiter = ",")
+
+#Save frequency and amplitude data to a new CSV file
+f = open("FrequencySpectrum.csv", "w")
+f.write("{},{}\n".format("Frequency (Hz)", "Amplitude"))
+for x in zip(xf, yf_abs):
+    f.write("{},{}\n".format(x[0], x[1]))
+f.close()  
        
